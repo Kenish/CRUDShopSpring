@@ -3,16 +3,11 @@ package com.projectmaking.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Product {
 private Product(){}
-
-    public Product(String description, String name, String type) {
-        this.description = description;
-        this.name = name;
-        this.type = type;
-    }
 
     @Id
     @GeneratedValue
@@ -21,12 +16,29 @@ private Product(){}
     private String name;
     private String type;
 
+    public Product(String description, String name, String type, BigDecimal price) {
+        this.description = description;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+    }
+
+    private BigDecimal price;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -60,6 +72,7 @@ private Product(){}
                 ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

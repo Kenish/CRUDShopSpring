@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @RequestMapping("")
     public String home(){
-        return "index.html";
+        return "redirect:index.html";
     }
     @RequestMapping(value = "register", produces = "text/html;charset=UTF-8")
     public String register(){
-        return "register/index.html";
+        return "static/index.html";
     }
 }

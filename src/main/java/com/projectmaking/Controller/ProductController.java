@@ -10,8 +10,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/")
 public class ProductController {
+    final ProductRepository repository;
+
     @Autowired
-    ProductRepository repository;
+    public ProductController(ProductRepository repository) {
+        this.repository = repository;
+    }
 
     @RequestMapping(value = "products",method = RequestMethod.POST)
     public Product add(@RequestBody Product product){
