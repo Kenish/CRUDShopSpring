@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/")
 public class UserController {
-    UserRepository repository;
+    private UserRepository repository;
     @Autowired
     public UserController(UserRepository repository){
        this.repository=repository ;
@@ -28,18 +28,19 @@ public class UserController {
        return repository.findOne(id);
     }
 
-    @RequestMapping(value = "users/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "users",method = RequestMethod.POST)
     public User add(@RequestBody User user){
         return repository.save(user);
     }
 
+
     @RequestMapping(value = "users/{id}",method = RequestMethod.DELETE)
-    public void delete(@RequestBody User user){
-        repository.delete(user);
+    public void delete(@PathVariable Long id){
+        repository.delete(id);
     }
 
     @RequestMapping(value = "users/{id}",method = RequestMethod.PUT)
-    public void update(@RequestBody User user, @RequestParam Long id){
+    public void update(@RequestBody User user, @PathVariable Long id){
         User olduser=repository.findOne(id);
         BeanUtils.copyProperties(user,olduser);
         repository.saveAndFlush(olduser);

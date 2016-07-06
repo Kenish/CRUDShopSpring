@@ -6,12 +6,12 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-    @Id @GeneratedValue Long id;
-    String name;
-    String surName;
-    String city;
-    String adress;
-    String country;
+    @Id @GeneratedValue private Long id;
+    private String name;
+    private String surName;
+    private String city;
+    private String adress;
+    private String country;
     private String password;
     public User(){};
 
@@ -92,8 +92,7 @@ public class User {
         if (surName != null ? !surName.equals(user.surName) : user.surName != null) return false;
         if (city != null ? !city.equals(user.city) : user.city != null) return false;
         if (adress != null ? !adress.equals(user.adress) : user.adress != null) return false;
-        if (country != null ? !country.equals(user.country) : user.country != null) return false;
-        return password != null ? password.equals(user.password) : user.password == null;
+        return country != null ? country.equals(user.country) : user.country == null && (password != null ? password.equals(user.password) : user.password == null);
 
     }
 
