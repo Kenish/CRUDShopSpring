@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/")
+@CrossOrigin(origins = "127.0.0.1:63342")
 public class UserController {
     private UserRepository repository;
     @Autowired
@@ -28,9 +29,14 @@ public class UserController {
        return repository.findOne(id);
     }
 
+//    @RequestMapping(value = "users", method = RequestMethod.POST)
+//    public User add(@RequestBody User user){
+//        return repository.save(user);
+//    }
+
     @RequestMapping(value = "users", method = RequestMethod.POST)
-    public User add(@RequestBody User user){
-        return repository.save(user);
+    public String success(){
+        return "SUCCESS";
     }
 
 
