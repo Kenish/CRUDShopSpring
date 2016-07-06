@@ -1,13 +1,17 @@
 package com.projectmaking.Controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/")
 public class HomeController {
-    @RequestMapping("/")
+    @RequestMapping("")
     public String home(){
-        return "test";
+        return "index.html";
+    }
+    @RequestMapping(value = "register", produces = "text/html;charset=UTF-8")
+    public String register(){
+        return "register/index.html";
     }
 }
