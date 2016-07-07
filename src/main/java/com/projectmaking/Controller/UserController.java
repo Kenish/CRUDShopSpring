@@ -6,11 +6,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/")
-@CrossOrigin(origins = "127.0.0.1:63342")
 public class UserController {
     private UserRepository repository;
     @Autowired
@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public List<User> list(){
-        return repository.findAll();
+      return repository.findAll();
     }
 
     @RequestMapping(value = "users/{id}", method = RequestMethod.GET)
@@ -29,15 +29,15 @@ public class UserController {
        return repository.findOne(id);
     }
 
-//    @RequestMapping(value = "users", method = RequestMethod.POST)
-//    public User add(@RequestBody User user){
-//        return repository.save(user);
-//    }
-
     @RequestMapping(value = "users", method = RequestMethod.POST)
+    public User add(@RequestBody User user){
+       return repository.saveAndFlush(user);
+    }
+
+/*    @RequestMapping(value = "users", method = RequestMethod.POST)
     public String success(){
         return "SUCCESS";
-    }
+    }*/
 
 
     @RequestMapping(value = "users/{id}", method = RequestMethod.DELETE)

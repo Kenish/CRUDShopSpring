@@ -1,17 +1,16 @@
 package com.projectmaking.Controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/")
+@Controller
+
 public class HomeController {
-    @RequestMapping("")
+    @RequestMapping(value = "/",method = RequestMethod.GET)
     public String home(){
-        return "redirect:index.html";
+        return "redirect:/index.html";
     }
-    @RequestMapping(value = "register", produces = "text/html;charset=UTF-8")
-    public String register(){
-        return "static/index.html";
-    }
+
 }

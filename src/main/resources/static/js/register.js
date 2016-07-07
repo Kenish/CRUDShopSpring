@@ -22,15 +22,15 @@ var Form = {
 
     send: function(){
         $.ajax({
-            url: "127.0.0.1:8080/api/users",
+            url: "http://localhost:8080/api/users",
             method: "POST",
-            data: Form.getData(),
-            dataType: "jsonp"
+            data: Form.getData()
         })
             .done(function(response){
                 console.log("Server response is: " + response.responseText);
                 console.log("Status: " + response.status)
             })
+            .fail(function(r){console.log(r)})
     },
 
     getData: function(){

@@ -17,19 +17,22 @@ public class ProductController {
         this.repository = repository;
     }
 
-    @RequestMapping(value = "products",method = RequestMethod.POST)
+    @RequestMapping(value = "products", method = RequestMethod.POST)
     public Product add(@RequestBody Product product){
         return repository.saveAndFlush(product);
     }
-    @RequestMapping(value = "product/{id}",method = RequestMethod.GET)
+
+    @RequestMapping(value = "product/{id}", method = RequestMethod.GET)
     public Product getOne(@PathVariable Long id){
         return repository.findOne(id);
     }
-    @RequestMapping(value = "products",method = RequestMethod.GET)
+
+    @RequestMapping(value = "products", method = RequestMethod.GET)
     public List<Product> getAll(){
         return repository.findAll();
     }
-    @RequestMapping(value = "product/{id}",method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "product/{id}", method = RequestMethod.DELETE)
     public void deleteProduct(@PathVariable Long id){
         repository.delete(id);
     }
