@@ -15,6 +15,7 @@ private Product(){}
     private String description;
     private String name;
     private String type;
+    private BigDecimal price;
 
     public Product(String description, String name, String type, BigDecimal price) {
         this.description = description;
@@ -22,8 +23,6 @@ private Product(){}
         this.type = type;
         this.price = price;
     }
-
-    private BigDecimal price;
 
     public Long getId() {
         return id;

@@ -22,7 +22,7 @@ public class ProductController {
         return repository.saveAndFlush(product);
     }
 
-    @RequestMapping(value = "product/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "products/{id}", method = RequestMethod.GET)
     public Product getOne(@PathVariable Long id){
         return repository.findOne(id);
     }
@@ -32,7 +32,7 @@ public class ProductController {
         return repository.findAll();
     }
 
-    @RequestMapping(value = "product/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "products/{id}", method = RequestMethod.DELETE)
     public void deleteProduct(@PathVariable Long id){
         repository.delete(id);
     }
