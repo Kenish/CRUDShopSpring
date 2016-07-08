@@ -36,12 +36,6 @@ public class UserController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-/*    @RequestMapping(value = "users", method = RequestMethod.POST)
-    public String success(){
-        return "SUCCESS";
-    }*/
-
-
     @RequestMapping(value = "users/{id}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable Long id){
         repository.delete(id);
