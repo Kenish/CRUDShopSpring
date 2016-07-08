@@ -18,6 +18,8 @@ function submitHandler() {
 
 var Form = {
 
+    username: "",
+
     isValid: function(){
         return true;
     },
@@ -34,6 +36,7 @@ var Form = {
             .done(function(data, textStatus, xhr){
                 if(xhr.status == 201){
                     console.log(textStatus);
+                    window.location.replace("/welcome?user=" + Form.username.toString());
                 }
             })
             .fail(function(r){console.log(r)})
@@ -46,6 +49,9 @@ var Form = {
         var jsObject = {};
         $.each(serializeForm, function(){
             jsObject[this.name] = this.value;
+            if (this.name=="username"){
+                Form.username = this.value;
+            }
         });
 
         return JSON.stringify(jsObject);
