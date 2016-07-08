@@ -1,16 +1,18 @@
 /**
  * Created by mati on 2016-07-06.
  */
+
 $(document).on("ready", function(){
     submitHandler();
 });
 
 function submitHandler() {
-    $("#submit").on("click", function(e){
-        e.preventDefault();
+    var form = $("#registerForm");
+    form.on("submit", function(){
         if(Form.isValid()){
             Form.send();
         }
+        return false;
     });
 }
 
@@ -22,20 +24,31 @@ var Form = {
 
     send: function(){
         $.ajax({
-            url: "http://localhost:8080/api/users",
+            url: "/api/users",
             method: "POST",
-            data: Form.getData()
+            data: Form.getData(),
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            }
         })
-            .done(function(response){
-                console.log("Server response is: " + response.responseText);
-                console.log("Status: " + response.status)
+            .done(function(data, textStatus, xhr){
+                if(xhr.status == 201){
+                    console.log(textStatus);
+                }
             })
             .fail(function(r){console.log(r)})
     },
 
     getData: function(){
-        var json = $("#registerForm").serializeObject();
-        return json;
+
+        var serializeForm = $("#registerForm").serializeArray();
+
+        var jsObject = {};
+        $.each(serializeForm, function(){
+            jsObject[this.name] = this.value;
+        });
+
+        return JSON.stringify(jsObject);
     }
 
 };
