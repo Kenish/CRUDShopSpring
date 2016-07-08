@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/users")
 public class UserController {
     private UserRepository repository;
     @Autowired
@@ -20,17 +20,17 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<User> list(){
       return repository.findAll();
     }
 
-    @RequestMapping(value = "users/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public User get(@PathVariable Long id){
        return repository.findOne(id);
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity add(@RequestBody User user){
        repository.saveAndFlush(user);
         return new ResponseEntity(HttpStatus.CREATED);
@@ -42,13 +42,13 @@ public class UserController {
     }*/
 
 
-    @RequestMapping(value = "users/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable Long id){
         repository.delete(id);
         return new ResponseEntity(HttpStatus.GONE);
     }
 
-    @RequestMapping(value = "users/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     public void update(@RequestBody User user, @PathVariable Long id){
         User oldUser = repository.findOne(id);
         user.setId(id);
