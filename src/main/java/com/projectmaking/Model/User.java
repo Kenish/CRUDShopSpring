@@ -1,10 +1,15 @@
 package com.projectmaking.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
+
 public class User {
     @Id @GeneratedValue private Long id;
     private String username;

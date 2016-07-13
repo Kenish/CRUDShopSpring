@@ -17,7 +17,7 @@ private Product(){}
     private String type;
     private BigDecimal price;
 
-    public Product(String description, String name, String type, BigDecimal price) {
+    public Product(String name, String type, BigDecimal price, String description) {
         this.description = description;
         this.name = name;
         this.type = type;
