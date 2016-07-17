@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface Cart {
 
-    void add(Product product);
+    void add(Long id);
     void remove(long id);
     List<Product> getAllProducts();
     BigDecimal getSummaryCost();

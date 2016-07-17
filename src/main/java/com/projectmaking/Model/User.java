@@ -1,25 +1,35 @@
 package com.projectmaking.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.DynamicUpdate;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 
 public class User {
     @Id @GeneratedValue private Long id;
+    @NotNull
     private String username;
+    @NotNull
     private String password;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String country;
+    @NotNull
     private String city;
+    @NotNull
     private Integer postalCode;
+    @NotNull
     private String address;
+    @ManyToMany
+    List<Product> favourites;
     public User(){}
 
 
@@ -104,6 +114,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void addFavourite(Product product){
+        favourites.add(product);
+    }
+
+    public void removeFavourite(Product product){
+        favourites.remove(product);
     }
 
     @Override

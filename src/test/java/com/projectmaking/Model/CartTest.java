@@ -19,13 +19,16 @@ public class CartTest {
 
     @Before
     public void setUp(){
-        cart = new CartImpl();
         repository = mock(ProductRepository.class);
+        cart = new CartImpl(repository);
     }
 
     @Test
     public void shouldAddProduct(){
-        cart.add(new Product("test", "dildo", new BigDecimal(231), "big black"));
+        Product testProduct = new Product("test", "dildo", new BigDecimal(231), "big black");
+        testProduct.setId(1L);
+        repository.save(testProduct);
+        cart.add(1L);
         assertEquals(1, cart.getAllProducts().size());
     }
 
@@ -35,11 +38,13 @@ public class CartTest {
         Product product2 = new Product("p2", "t2", new BigDecimal(2), "d2");
         product1.setId(1L);
         product2.setId(2L);
-        cart.add(product1);
-        cart.add(product2);
-        cart.remove(product1.getId());
+        repository.save(product1);
+        repository.save(product2);
+        cart.add(1L);
+        cart.add(2L);
+        cart.remove(1L);
         assertEquals(1, cart.getAllProducts().size());
-        contains(cart.getAllProducts(), product1);
+        contains(cart.getAllProducts(), product2);
     }
 
     @Test
@@ -48,8 +53,10 @@ public class CartTest {
         Product product2 = new Product("p2", "t2", new BigDecimal(2), "d2");
         product1.setId(1L);
         product2.setId(2L);
-        cart.add(product1);
-        cart.add(product2);
+        repository.save(product1);
+        repository.save(product2);
+        cart.add(1L);
+        cart.add(2L);
         assertEquals(2, cart.getAllProducts().size());
         contains(cart.getAllProducts(), product1);
         contains(cart.getAllProducts(), product2);
@@ -61,8 +68,10 @@ public class CartTest {
         Product product2 = new Product("p2", "t2", new BigDecimal(2), "d2");
         product1.setId(1L);
         product2.setId(2L);
-        cart.add(product1);
-        cart.add(product2);
+        repository.save(product1);
+        repository.save(product2);
+        cart.add(1L);
+        cart.add(2L);
         assertEquals(new BigDecimal(3), cart.getSummaryCost());
     }
 
@@ -72,8 +81,10 @@ public class CartTest {
         Product product2 = new Product("p2", "t2", new BigDecimal(13), "d2");
         product1.setId(1L);
         product2.setId(2L);
-        cart.add(product1);
-        cart.add(product2);
+        repository.save(product1);
+        repository.save(product2);
+        cart.add(1L);
+        cart.add(2L);
         cart.remove(product1.getId());
         assertEquals(new BigDecimal(13), cart.getSummaryCost());
     }

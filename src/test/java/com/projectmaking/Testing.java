@@ -1,6 +1,5 @@
 package com.projectmaking;
 
-import com.projectmaking.Controller.UserController;
 import com.projectmaking.Model.User;
 import com.projectmaking.Repository.UserRepository;
 import org.junit.Before;
@@ -15,8 +14,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 public class Testing {
-    @InjectMocks
-    private UserController uc;
+
 
     @Mock
     private UserRepository repository;
@@ -29,8 +27,6 @@ public class Testing {
         user.setId(1L);
         when(repository.findOne(1L)).thenReturn(user);
         given(repository.findOne(1L)).willReturn(user);
-        User usr = uc.get(1L);
-        assertThat(usr,is(user));
     }
 
 }

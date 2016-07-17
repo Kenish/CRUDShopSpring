@@ -6,8 +6,6 @@ import com.projectmaking.Model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -21,7 +19,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public List<Product> getCart(HttpSession session) {
+    public List<Product> getCart() {
         return cart.getAllProducts();
     }
 
@@ -30,8 +28,8 @@ public class CartController {
         cart.remove(id);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)
-    public void addProduct(@RequestBody Product product){
-        cart.add(product);
+    @RequestMapping(value = "/{id}",method = RequestMethod.POST)
+    public void addProduct(@PathVariable Long id){
+        cart.add(id);
     }
 }
