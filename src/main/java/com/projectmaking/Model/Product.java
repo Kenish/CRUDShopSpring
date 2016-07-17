@@ -1,9 +1,9 @@
 package com.projectmaking.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -13,11 +13,15 @@ private Product(){}
     @GeneratedValue
     private Long id;
     private String description;
+    @NotNull
     private String name;
     private String type;
+    @NotNull
     private BigDecimal price;
+    @ManyToMany
+    private List<User> userList;
 
-    public Product(String description, String name, String type, BigDecimal price) {
+    public Product(String name, String type, BigDecimal price, String description) {
         this.description = description;
         this.name = name;
         this.type = type;
@@ -62,6 +66,10 @@ private Product(){}
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void addToList(User user){
+        userList.add(user);
     }
 
     @Override
