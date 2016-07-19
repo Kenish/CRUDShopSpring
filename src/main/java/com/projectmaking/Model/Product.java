@@ -1,5 +1,7 @@
 package com.projectmaking.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -69,7 +71,12 @@ private Product(){}
     }
 
     public void addToList(User user){
-        userList.add(user);
+        if (!userList.contains(user)){
+            userList.add(user);
+        }
+    }
+    public void removeFromList(User user){
+        userList.remove(user);
     }
 
     @Override

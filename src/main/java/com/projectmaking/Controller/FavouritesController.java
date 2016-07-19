@@ -27,13 +27,18 @@ public class FavouritesController {
         Product product = productRepository.findOne(productId);
         newUser.addFavourite(product);
         product.addToList(newUser);
-        productRepository.saveAndFlush(product);
+
         userRepository.saveAndFlush(newUser);
         return HttpStatus.ACCEPTED;
     }
     @RequestMapping(value = "api/users/{id}/favourite/{ProductId}",method = RequestMethod.DELETE)
     HttpStatus removeFavouriteProduct(@PathVariable("id") Long id,@PathVariable("ProductId")Long productId){
-        userRepository.findOne(id).removeFavourite(productRepository.findOne(productId));
+        User user =userRepository.findOne(id);
+        Product product = productRepository.findOne(productId);
+        user.removeFavourite(product);
+        product.removeFromList(user);
+        userRepository.saveAndFlush(user);
+        productRepository.saveAndFlush(product);
         return HttpStatus.NO_CONTENT;
     }
 }

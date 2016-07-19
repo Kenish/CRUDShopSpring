@@ -28,8 +28,8 @@ public class User {
     private Integer postalCode;
     @NotNull
     private String address;
-    @ManyToMany
-    List<Product> favourites;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Product> favourites;
     public User(){}
 
 
@@ -117,7 +117,8 @@ public class User {
     }
 
     public void addFavourite(Product product){
-        favourites.add(product);
+        if (!favourites.contains(product)){
+        favourites.add(product);}
     }
 
     public void removeFavourite(Product product){
