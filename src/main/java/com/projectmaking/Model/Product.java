@@ -1,11 +1,10 @@
 package com.projectmaking.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 public class Product {
@@ -20,8 +19,7 @@ private Product(){}
     private String type;
     @NotNull
     private BigDecimal price;
-    @ManyToMany
-    private List<User> userList;
+
 
     public Product(String name, String type, BigDecimal price, String description) {
         this.description = description;
@@ -70,14 +68,7 @@ private Product(){}
         this.type = type;
     }
 
-    public void addToList(User user){
-        if (!userList.contains(user)){
-            userList.add(user);
-        }
-    }
-    public void removeFromList(User user){
-        userList.remove(user);
-    }
+
 
     @Override
     public String toString() {
