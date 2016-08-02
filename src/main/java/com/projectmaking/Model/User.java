@@ -1,9 +1,5 @@
 package com.projectmaking.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonView;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -11,8 +7,10 @@ import java.util.List;
 @Entity
 
 public class User {
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue
+    private Long id;
     @NotNull
+    @Column(unique = true)
     private String username;
     @NotNull
     private String password;
@@ -28,8 +26,21 @@ public class User {
     private Integer postalCode;
     @NotNull
     private String address;
-    @ManyToMany
-    List<Product> favourites;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Product> favourites;
+    @Transient
+    private String role="USER";
+    @Transient
+    private boolean enabled=true;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public User(){}
 
 
@@ -42,6 +53,9 @@ public class User {
         this.city = city;
         this.postalCode = postalCode;
         this.address = address;
+        this.role="USER";
+        this.enabled=true;
+
     }
 
     public Long getId() {
@@ -116,10 +130,14 @@ public class User {
         this.address = address;
     }
 
-    public void addFavourite(Product product){
-        favourites.add(product);
+    public List<Product> getFavourites() {
+        return favourites;
     }
 
+    public void addFavourite(Product product){
+        if (!favourites.contains(product)){
+        favourites.add(product);}
+    }
     public void removeFavourite(Product product){
         favourites.remove(product);
     }
