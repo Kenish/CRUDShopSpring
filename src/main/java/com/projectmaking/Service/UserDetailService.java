@@ -1,4 +1,4 @@
-package com.projectmaking.Config;
+package com.projectmaking.Service;
 
 import com.projectmaking.Model.User;
 import com.projectmaking.Repository.UserRepository;
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class TestUserDetailService implements UserDetailsService {
+public class UserDetailService implements UserDetailsService {
     @Autowired
-    UserRepository repository;
+    private  UserRepository repository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException  {
         User user = repository.findByUsername(username);

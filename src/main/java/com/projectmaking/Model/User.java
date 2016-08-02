@@ -130,6 +130,10 @@ public class User {
         this.address = address;
     }
 
+    public List<Product> getFavourites() {
+        return favourites;
+    }
+
     public void addFavourite(Product product){
         if (!favourites.contains(product)){
         favourites.add(product);}

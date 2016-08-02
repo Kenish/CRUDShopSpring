@@ -1,5 +1,6 @@
 package com.projectmaking.Config;
 
+import com.projectmaking.Service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,11 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    TestUserDetailService testUserDetailService;
+    private UserDetailService userDetailService;
 
     @Autowired
     public void ConfigAuthentication (AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
-        authenticationManagerBuilder.userDetailsService(testUserDetailService);
+        authenticationManagerBuilder.userDetailsService(userDetailService);
     }
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{

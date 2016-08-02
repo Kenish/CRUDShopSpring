@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class FavouritesController {
     private final UserRepository userRepository;
@@ -29,6 +31,11 @@ public class FavouritesController {
         newUser.addFavourite(product);
         userRepository.saveAndFlush(newUser);
         return HttpStatus.ACCEPTED;
+    }
+    @RequestMapping(value = "api/users/favourite",method = RequestMethod.GET)
+    List<Product> getFavourites(){
+        User newUser =userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return newUser.getFavourites();
     }
     @RequestMapping(value = "api/users/favourite/{ProductId}",method = RequestMethod.DELETE)
     HttpStatus removeFavouriteProduct(@PathVariable("ProductId")Long productId){
