@@ -23,7 +23,7 @@ public class UserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException(username + " was not found");
         }
         List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-        if (user.getRole().equals("Admin")){
+        if (user.getRole().equals("ADMIN")){
             auth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
         return new org.springframework.security.core.userdetails.User(username,user.getPassword(),auth);

@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class PersistanceConfiguration {
+
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     @Primary
