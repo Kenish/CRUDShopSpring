@@ -3,8 +3,10 @@ package com.projectmaking.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -19,6 +21,8 @@ private Product(){}
     private String type;
     @NotNull
     private BigDecimal price;
+    @OneToMany(targetEntity = Comment.class)
+    private List<Comment> comments ;
 
 
     public Product(String name, String type, BigDecimal price, String description) {
@@ -68,7 +72,13 @@ private Product(){}
         this.type = type;
     }
 
+    public void addComment(Comment comment){
+        comments.add(comment);
+    }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
 
     @Override
     public String toString() {
