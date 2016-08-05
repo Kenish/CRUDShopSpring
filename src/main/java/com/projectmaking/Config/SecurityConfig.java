@@ -45,14 +45,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2/*").permitAll()
                 .antMatchers("/api/user").authenticated()
                 .antMatchers("/api/cart").permitAll()
+                .antMatchers("/api/cart/order").authenticated()
                 .antMatchers(HttpMethod.POST,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET,"/api/products").permitAll()
-                .antMatchers("api/test").hasRole("USER")
+                .antMatchers("/api/orders").hasRole("ADMIN")
                 .and().formLogin().and().httpBasic()
+                .and().headers().frameOptions().disable()
                 .and().csrf().disable();
-        httpSecurity.headers().frameOptions().disable();
+
     }
 }

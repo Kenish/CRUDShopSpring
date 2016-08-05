@@ -29,7 +29,8 @@ public class User {
     private String address;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Product> favourites;
-
+    @OneToMany(targetEntity = Order.class)
+    private List<Order> orders;
     private String role = "USER";
     @Transient
     private boolean enabled = true;
@@ -143,6 +144,19 @@ public class User {
 
     public void removeFavourite(Product product) {
         favourites.remove(product);
+    }
+
+    public void addOrder(Order order) {
+        if (!orders.contains(order)) {
+            orders.add(order);
+        }
+    }
+    public void removeOrder(Order order) {
+        orders.remove(order);
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override

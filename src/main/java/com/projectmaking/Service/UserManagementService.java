@@ -20,6 +20,9 @@ public class UserManagementService {
         return repository.findOne(id) ;
     }
     public HttpStatus register(User user){
+        if (repository.findByUsername(user.getUsername())!=null){
+            return HttpStatus.CONFLICT;
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.saveAndFlush(user);
         return HttpStatus.CREATED;
