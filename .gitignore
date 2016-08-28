@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea/
+/.mvn/
+/src/main/resources/static/.idea/
+/src/main/resources/static/node_modules/
+/target/
