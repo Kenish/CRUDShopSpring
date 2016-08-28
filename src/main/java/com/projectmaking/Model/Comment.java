@@ -26,8 +26,7 @@ public class Comment {
         this.starsRating = starsRating;
     }
 
-    public Comment() {//jpa only
-         }
+    public Comment() { } //jpaonly
 
     public String getUsername() {
         return username;

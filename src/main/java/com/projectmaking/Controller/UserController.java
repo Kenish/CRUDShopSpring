@@ -21,7 +21,7 @@ public class UserController {
 
     @RequestMapping(value = "/api/users",method = RequestMethod.GET)
     public User printUser(){
-        return userManagementService.printUser();
+        return userManagementService.getUser();
         }
 
     @RequestMapping(value = "/api/users",method = RequestMethod.POST)

@@ -19,12 +19,32 @@ private Product(){}
     @NotNull
     private String name;
     private String type;
+    private String imageURL;
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @NotNull
     private BigDecimal price;
     @OneToMany(targetEntity = Comment.class)
     private List<Comment> comments ;
 
 
+    public Product(String description, String name, String type, String imageURL) {
+        this.description = description;
+        this.name = name;
+        this.type = type;
+        this.imageURL = imageURL;
+    }
     public Product(String name, String type, BigDecimal price, String description) {
         this.description = description;
         this.name = name;

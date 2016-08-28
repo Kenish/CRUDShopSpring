@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -25,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
      DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -44,8 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/h2/*").permitAll()
                 .antMatchers("/api/user").authenticated()
+                .antMatchers("/api/user/*").authenticated()
                 .antMatchers("/api/cart").permitAll()
                 .antMatchers("/api/cart/order").authenticated()
+                .antMatchers("/api/addresses").authenticated()
+                .antMatchers("/api/addresses").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/api/products").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT,"/api/products").hasRole("ADMIN")

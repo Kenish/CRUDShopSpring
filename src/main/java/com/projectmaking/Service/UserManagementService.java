@@ -4,6 +4,7 @@ import com.projectmaking.Model.User;
 import com.projectmaking.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ public class UserManagementService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User printUser(){
-        Long id =repository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
-        return repository.findOne(id) ;
+    public User getUser() {
+
+       return repository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
     public HttpStatus register(User user){
         if (repository.findByUsername(user.getUsername())!=null){
@@ -32,5 +33,7 @@ public class UserManagementService {
         repository.delete(id);
         return HttpStatus.NO_CONTENT;
     }
+
+
 
 }

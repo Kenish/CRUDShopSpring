@@ -14,7 +14,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        User admin = new User("admin","admin1","aa","a","a","ma", 123, "aa");
+        User admin = new User("admin","admin1","admin@page.com");
         admin.setRole("ADMIN");
         userManagementService.register(admin);
     }
