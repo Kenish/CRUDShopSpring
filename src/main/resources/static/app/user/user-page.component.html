@@ -1,0 +1,9 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div></div>
+<div *ngIf='user' class="panel-body">
+    <div  class="row">username: {{user.username}}</div>
+    <div  class="row">email: {{user.email}}</div>
+    <div  class="row">role: {{user.role}}</div>
+</div>
