@@ -4,3 +4,4 @@
 /src/main/resources/static/.idea/
 /target/
 /src/main/resources/npm-debug.log
+/src/main/resources/static/node_modules/

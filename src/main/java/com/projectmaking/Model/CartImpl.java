@@ -18,11 +18,15 @@ public class CartImpl implements Cart {
 
     private ProductRepository productRepository;
 
+    private List<Product> productList ;
+
     @Autowired
     public CartImpl(ProductRepository productRepository){
         this.productRepository = productRepository;
+        productList = new ArrayList<>();
     }
-    private List<Product> productList = new ArrayList<>();
+
+
 
     @Override
     public void add(Long id) {
@@ -31,8 +35,8 @@ public class CartImpl implements Cart {
 
     @Override
     public void remove(long id) {
-        Predicate<Product> i = (product)->product.getId()==id;
-        productList.removeIf(i);
+        System.out.println(productList);
+        productList.removeIf(product -> product.getId()==id);
     }
 
     @Override
